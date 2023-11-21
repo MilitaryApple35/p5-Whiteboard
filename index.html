@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Whiteboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <div id="drawing-container">
+        <div class="sidebar">
+            <ul>
+                <li class="selector-label">
+                    <label for="color">Color:</label>
+                </li>
+                <li class="selector">
+                    <input type="color" id="color" />
+                </li>
+                <li></li>
+                <li class="selector">
+                    <button id="size"></button>
+                    <div id="size-menu" style="display: none;">
+                        <label for="size-slider">Size:</label>
+                        <input type="range" id="size-slider" min="3" max="200" value="3">
+                        <p id="slider-value"></p>
+                    </div>
+                </li>
+                <li class="special-buttons">
+                    <button id="clear"><span class="material-symbols-outlined">delete</span></button>
+                    <button id="download"><span class="material-symbols-outlined"><span class="material-symbols-outlined">download</span></button>
+                </li>
+            </ul>
+        </div>
+        <div id="canvas-container"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <script type="module" src="./assets/script.js"></script>
+    <script type="module" src="./assets/p5.js"></script>
+</body>
+</html>
