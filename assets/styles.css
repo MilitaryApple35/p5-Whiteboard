@@ -87,6 +87,22 @@ body {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+
+.sidebar .add{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    height: 25px;   
+    width: 25px; 
+}
+
 #color{
     background-color: transparent;
     height: 100%;
@@ -145,6 +161,7 @@ body {
     -moz-transform: scale(var(--weight));
     -ms-transform: scale(var(--weight));
     -o-transform: scale(var(--weight));
+    -webkit-border-radius: 50%;
 }
 .sidebar input,
 .sidebar button {

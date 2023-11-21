@@ -7,6 +7,8 @@ let weight = document.getElementById('size-slider');
 let paths = [];
 let currentPath = [];
 let pg;
+let textBoxes = [];
+let mode = 'draw'; // Inicialmente en modo de dibujo
 
 let sketch = function(p) {
     p.setup = function() {
@@ -18,24 +20,74 @@ let sketch = function(p) {
         pg = p.createGraphics(containerWidth, containerHeight);
     }
 
+    document.getElementById('add-text-box').addEventListener('click', function() {
+        const textBox = {
+            x: 50,
+            y: 50,
+            text: 'Texto aquí',
+            isSelected: false
+        };
+        textBoxes.push(textBox);
+    });
+
+    document.getElementById('toggle-mode').addEventListener('click', function() {
+        if (mode === 'draw') {
+            mode = 'text';
+        } else {
+            mode = 'draw';
+        }
+    });
+
     p.mousePressed = function() {
-        currentPath = [];
-        paths.push(currentPath);
+        if (mode === 'draw') {
+            if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+                const point = {
+                    x: p.mouseX,
+                    y: p.mouseY,
+                    color: colorInput.value,
+                    weight: weight.value
+                };
+                currentPath.push(point);
+            }
+        } else {
+            textBoxes.forEach(textBox => {
+                if (p.mouseX > textBox.x && p.mouseX < textBox.x + 100 && p.mouseY > textBox.y && p.mouseY < textBox.y + 20) {
+                    textBox.isSelected = true;
+                } else {
+                    textBox.isSelected = false;
+                }
+            });
+        }
+    }
+
+    p.mouseDragged = function() {
+        if (mode === 'draw') {
+            if (p.mouseIsPressed && p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+                const point = {
+                    x: p.mouseX,
+                    y: p.mouseY,
+                    color: colorInput.value,
+                    weight: weight.value
+                };
+                currentPath.push(point);
+            }
+        } else {
+            textBoxes.forEach(textBox => {
+                if (textBox.isSelected) {
+                    textBox.x = p.mouseX;
+                    textBox.y = p.mouseY;
+                }
+            });
+        }
     }
 
     p.draw = function() {
         p.background(255);
         p.image(pg, 0, 0);
 
-        if(p.mouseIsPressed && p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height){
-            const point = {
-                x: p.mouseX,
-                y: p.mouseY,
-                color: colorInput.value,
-                weight: weight.value
-            };
-            currentPath.push(point);
-        }
+        textBoxes.forEach(textBox => {
+            p.text(textBox.text, textBox.x, textBox.y);
+        });
 
         paths.forEach(path => {
             for (let i = 1; i < path.length; i++) {
@@ -52,6 +104,7 @@ let sketch = function(p) {
 let myp5 = new p5(sketch);
 
 function clearCanvas() {
+    textBoxes = [];
     paths = [];
     currentPath = [];
     pg.clear();
