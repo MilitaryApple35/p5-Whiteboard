@@ -20,7 +20,6 @@ window.onload = function() {
                 canvas.style('height', '100%');
                 canvas.parent('canvas-container');
                 pg = p.createGraphics(containerWidth, containerHeight);
-                pg.pixelDensity(5);
         }
 
         p.mousePressed = function() {
