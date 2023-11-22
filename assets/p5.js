@@ -14,6 +14,8 @@ let sketch = function(p) {
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;
         const canvas = p.createCanvas(containerWidth, containerHeight);
+        canvas.style('width', '100%');
+        canvas.style('height', '100%');
         canvas.parent('canvas-container');
         pg = p.createGraphics(containerWidth, containerHeight);
     }
