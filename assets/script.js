@@ -20,3 +20,6 @@ document.addEventListener('click', function() {
     const sizeMenu = document.getElementById('size-menu');
     sizeMenu.style.display = 'none';
 });
+
+
+

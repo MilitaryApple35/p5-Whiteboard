@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-    <div id="drawing-container">
+    <div class="drawing-container">
         <div class="sidebar">
             <ul>
-                <li class="selector-label">
-                    <label for="color">Color:</label>
+                <li></li>
+                <li class="add">
+                    <button id="draw-mode"><span class="material-symbols-outlined">edit</span></button>
                 </li>
+                <li></li>
                 <li class="selector">
                     <input type="color" id="color" />
                 </li>
@@ -23,15 +25,20 @@
                     <div id="size-menu" style="display: none;">
                         <label for="size-slider">Size:</label>
                         <input type="range" id="size-slider" min="3" max="200" value="3">
-                        <p id="slider-value"></p>
+                        <p id="slider-value">3</p>
                     </div>
                 </li>
                 <li></li>
                 <li class="add">
                     <button id="add-text-box"><span class="material-symbols-outlined">note_add</span></button>
                 </li>
+                <li></li>
+                <li class="add">
+                    <button id="pointer"><span class="material-symbols-outlined">arrow_selector_tool</span></button>
+                </li>
                 <li class="special-buttons">
                     <button id="clear"><span class="material-symbols-outlined">delete</span></button>
+                    
                     <button id="download"><span class="material-symbols-outlined"><span class="material-symbols-outlined">download</span></button>
                 </li>
             </ul>
