@@ -1,40 +1,47 @@
 import { gsap } from "https://cdn.skypack.dev/gsap"
-import { Draggable } from "https://cdn.skypack.dev/@shopify/draggable"
+import { Draggable } from 'https://cdn.skypack.dev/gsap/Draggable';
 let n_note=0;
 gsap.registerPlugin(Draggable);
 
-function createNote(parent){
+function createNote(parent) {
     console.log(parent);
     const note = document.createElement('div');
     note.classList.add('note');
     n_note++;
+    note.id = `note_${n_note}`;
     note.innerHTML = `
-        <div id="note_${n_note}" class="note-header">
-            <div class="note-header-text">Note</div>
+        <div class="note-header">
+            <input type="text" data-clickable="true" class="note-header-text" placeholder="Note">
             <div class="note-header-close">x</div>
         </div>
-        <div class="note-body">
-            <textarea class="note-body-text"></textarea>
+        <div data-clickable="true" class="note-body">
+            <input class="note-body-text"></input>
         </div>
     `;
     parent.appendChild(note);
-    new Draggable(document.getElementById(`note_${n_note}`), {
-        bounds: "#canvas-container",
-        ondrag: function() {
-            this.target.style.boxShadow = "box-shadow: 0px 10px 24px 0px rgba(0,0,0,0.15)"; // Fix: Added missing semicolon
-        },
-        ondragend: function() {
-            this.target.style.boxShadow = "none";
-        }
+    document.querySelectorAll('[data-clickable="true"]').forEach(element => {
+        element.addEventListener('click', function(event) {
+            event.stopPropagation();
+            this.focus();  
+        });
+        element.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                this.blur();
+            }
+        });
     });
-    console.log(note);
+    Draggable.create(`#note_${n_note}`, {
+        type: "x,y",
+        bounds: "#canvas-container",
+        clickabletest: true,
+        touchable: true // Habilitar el arrastre táctil
+    });
     return note;
 }
 
 document.querySelectorAll('#add-note').forEach(button => {
-    console.log('button');
     button.addEventListener('click', function() {
-        console.log('clicked');
         const note = createNote(document.getElementById('canvas-container'));
         note.querySelector('.note-header-close').addEventListener('click', function() {
             note.remove();

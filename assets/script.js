@@ -22,11 +22,11 @@ document.addEventListener('click', function() {
 });
 
 // Disable touch scroll inside elements with class "drawing-container"
-const drawingContainers = document.getElementsByClassName('drawing-container');
-for (let i = 0; i < drawingContainers.length; i++) {
-    drawingContainers[i].addEventListener('touchmove', function(event) {
-        event.preventDefault();
-    });
-}
+// const drawingContainers = document.getElementsByClassName('drawing-container');
+// for (let i = 0; i < drawingContainers.length; i++) {
+//     drawingContainers[i].addEventListener('touchmove', function(event) {
+//         event.preventDefault();
+//     });
+// }
 
 
